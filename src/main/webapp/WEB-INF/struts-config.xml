@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+        "http://jakarta.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="myLoginForm" type="com.example.mystruts5.forms.LoginForm"/>
+<!--        <form-bean name="myWelcome" type="com.example.mystruts5.forms.WelcomeForm"/>-->
+        <form-bean name="myCategoryForm" type="com.example.mystruts5.forms.CategoryForm"/>
+    </form-beans>
+    <action-mappings>
+        <action path="/showCategories"
+                type="com.example.mystruts5.actions.CategoriesAction"
+                name="myCategoryForm"
+                scope="request"
+                validate="false">
+            <forward name="categoriesSuccess" path="/categories.jsp"/>
+        </action>
+        <action path="/showProducts"
+                type="com.example.mystruts5.actions.ProductAction"
+                name="myCategoryForm"
+                scope="request"
+                validate="false">
+            <forward name="productSuccess" path="/products.jsp"/>
+        </action>
+        <action path="/index" forward="/login.jsp"/>
+        <action path="/login" name="myLoginForm" type="com.example.mystruts5.actions.LoginAction"
+                scope="request" validate="false" parameter="methodName">
+            <forward name="show" path="/welcome.jsp"/>
+            <forward name="nshow" path="/home.jsp"/>
+            <forward name="error" path="/failer.jsp"/>
+        </action>
+    </action-mappings>
+
+    <message-resources parameter="messages" key="myMessages"/>
+</struts-config>
